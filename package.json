@@ -1,0 +1,1 @@
+{"name":"ethicscomitee","version":"1.0.0","private":true,"description":"Closed-corpus ethics assistant for Kazakhstan public service","scripts":{"start":"node server.js"},"engines":{"node":">=18"}}

@@ -1,0 +1,119 @@
+<!doctype html>
+<!--
+  EthicsComitee — структура фронтенда (разделение по ролям):
+    index.html   — только разметка (HTML)
+    css/*.css    — оформление (дизайн); порядок подключения ниже = порядок каскада
+    js/*.js      — поведение (код); порядок подключения ниже важен
+  Сервер (server.js) и данные (data/) в этот каталог фронтенда не входят.
+-->
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EthicsComitee — этика государственной службы</title>
+<meta name="description" content="EthicsComitee — сервис для изучения этики государственной службы Республики Казахстан: ИИ-разбор ситуаций и практические кейсы.">
+
+<!-- JS: ранняя инициализация темы (должна выполниться до отрисовки страницы) -->
+<script src="js/theme-init.js"></script>
+
+<!-- Шрифты Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- CSS: порядок = порядок каскада. Футер и утилиты — в конце -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/quiz.css">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/theme-dark.css">
+<link rel="stylesheet" href="css/effects.css">
+<link rel="stylesheet" href="css/theme-light.css">
+<link rel="stylesheet" href="css/faq.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/utilities.css">
+<link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+
+<!-- ═══════════ ШАПКА: выбор языка, вкладки, переключатель темы ═══════════ -->
+<header class="top"><div class="shell nav"><div class="language-control"><label class="visually-hidden" for="languageSelect">Language</label><select id="languageSelect" aria-label="Language"><option value="ru">Русский</option><option value="kk">Қазақша</option><option value="en">English</option></select></div><nav class="links" aria-label="Основная навигация"><button class="active" data-page="homePage" type="button">Главная</button><button data-page="analysisPage" type="button">Разбор</button><button data-page="practicePage" type="button">Практика</button><button data-page="faqPage" type="button">Q&amp;A</button></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="Сменить тему" title="Сменить тему"><span id="themeIcon" aria-hidden="true">☾</span></button></div></header>
+<!-- ═══════════ СОДЕРЖИМОЕ: вкладки-страницы переключаются скриптом (js/app.js) ═══════════ -->
+<main class="shell">
+<!-- ——— Страница «Главная» ——— -->
+<section class="page" id="homePage">
+  <figure class="home-banner">
+    <img class="home-banner-img home-banner-dark" src="img/banner-dark.webp" width="1666" height="460" alt="EthicsComitee" decoding="async">
+    <img class="home-banner-img home-banner-light" src="img/banner-light.webp" width="1666" height="467" alt="EthicsComitee" decoding="async">
+  </figure>
+  <section class="hero"><div><div class="eyebrow">Этика государственной службы · Республика Казахстан</div><h1>EthicsComitee</h1><p>Сервис для анализа этических ситуаций и проверки знаний о требованиях к государственным служащим Республики Казахстан. Предназначен для госслужащих, кандидатов на службу, студентов и всех, кто изучает публичное управление.</p><p>Помогает оценивать служебное поведение и поступки в личной жизни с учётом требований государственной службы.</p></div><aside class="hero-note"><div class="num">РК</div><strong>Законодательство Республики Казахстан</strong><p>Сервис использует законодательство Республики Казахстан и работает в пределах загруженной базы нормативных правовых актов.</p></aside></section>
+  <section class="section section-tight"><div class="eyebrow">Что внутри</div><h2>Два формата работы</h2><p class="lead">Выберите инструмент в меню выше: анализ конкретной ситуации или самостоятельная проверка знаний.</p><div class="grid"><article class="tile"><h3>Разбор</h3><p>ИИ сопоставляет обстоятельства ситуации с локальной базой НПА и формирует аналитический ответ.</p></article><article class="tile"><h3>Практика</h3><p>Кейсы проверяют понимание этических требований в служебной деятельности и личной жизни.</p></article></div></section>
+</section>
+<!-- ——— Страница «Разбор» (чат с ИИ + список документов) ——— -->
+<section class="page hidden" id="analysisPage">
+  <div class="page-kicker">ИИ-помощник · Анализ ситуации</div><h1 class="page-heading">Разбор ситуации</h1><p class="page-description">ИИ сопоставляет изложенные обстоятельства с доступными положениями НПА, выявляет этические риски и указывает факторы, влияющие на оценку.</p>
+  <div class="sample-area"><button class="sample" type="button">Может ли госслужащий принять подарок от лица, обращавшегося за государственной услугой?</button><button class="sample" type="button">Как действовать, если личная заинтересованность может повлиять на объективность решения?</button><button class="sample" type="button">Допустимо ли использовать служебный автомобиль в личных целях?</button><button class="sample" type="button">Какие требования к поведению госслужащего распространяются на его публичные высказывания в социальных сетях?</button></div>
+  <section id="assistant" class="panel"><div class="view" id="chatView"><div class="chat-head"><h2>ИИ-разбор</h2><span class="status" id="apiStatus">Проверка сервера…</span></div><div class="conversation" id="conversation"><div class="welcome"><strong>Опишите ситуацию или задайте вопрос</strong><p>Укажите обстоятельства, участников и контекст, необходимые для правовой и этической оценки.</p></div></div><form id="askForm" class="composer"><textarea id="question" maxlength="5000" required placeholder="Опишите гипотетическую ситуацию или задайте вопрос…"></textarea><div class="compose-foot"><small>Не указывайте персональные данные, служебную тайну или сведения ограниченного доступа.</small><button class="send" id="sendBtn" type="submit">Разобрать ситуацию&nbsp; ↗</button></div></form></div></section>
+  <div class="disclaimer">Ответ ИИ носит информационно-аналитический характер, не имеет юридической силы и не является официальным разъяснением или решением уполномоченного органа. Проверяйте ссылки на НПА и фактические обстоятельства.</div>
+  <div class="view panel panel-spaced"><h2 class="panel-title">Документы в локальной базе</h2><div id="sourceList" class="grid"></div><div class="notice">Сервис отвечает только в пределах документов, загруженных в локальную базу. Если подходящие положения не найдены, он должен сообщить об ограничении.</div></div>
+</section>
+<!-- ——— Страница «Практика» (тест; содержимое строит js/quiz.js) ——— -->
+<section class="page hidden" id="practicePage">
+  <div class="page-kicker">Самостоятельная проверка знаний</div><h1 class="page-heading">Практика</h1><p class="page-description">Оцените поведение государственного служащего в служебных и личных ситуациях. Выберите один из вариантов: «Этично», «Неэтично» или «Спорно». После ответа отобразятся пояснение и нормативное основание.</p>
+  <div class="disclaimer disclaimer-flush">Кейсы для практики подготовлены с помощью ИИ, однако сами тесты не подключены к ИИ через API. Все ситуации, правильные ответы, пояснения, нормативные основания и итоговая обратная связь заранее сохранены в проекте и не меняются в реальном времени в зависимости от ваших ответов. При повторных прохождениях возможны повторения кейсов: набор ограничен заранее подготовленной базой, меняется только порядок их предъявления.</div>
+  <p class="hint term-hint">Синие юридические термины — наведите курсор или выберите термин, чтобы увидеть пояснение и источник.</p>
+  <section class="panel"><div class="view" id="testsView"><div class="chat-head"><h2>Тестирование по этике</h2><span class="hint" id="quizTotal">Загрузка кейсов…</span></div><div id="quizRoot"><div class="quiz-intro"><strong>Оцените ситуацию с точки зрения этики государственной службы</strong><p class="lead lead-tight">Выберите сложность. Кейсы будут перемешаны случайным образом. После каждого ответа вы увидите пояснение независимо от того, верно ли ответили.</p></div><h3 class="subhead">Выберите сложность</h3><div class="quiz-options"><button class="quiz-level" data-level="easy"><strong>Легкий</strong><small>Базовые принципы и повседневные ситуации</small></button><button class="quiz-level" data-level="medium"><strong>Средний</strong><small>Применение норм и оценка обстоятельств</small></button><button class="quiz-level" data-level="hard"><strong>Сложный</strong><small>Конфликт интересов и тонкие правовые границы</small></button><button class="quiz-level" data-level="all"><strong>Все уровни</strong><small>Смешанная подборка разной сложности</small></button></div><p class="hint">Набор кейсов заранее подготовлен. Каждый запуск формирует случайную последовательность.</p></div></div></section>
+</section>
+<!-- ——— Страница «Q&A» (вопросы строит js/faq.js) ——— -->
+<section class="page hidden" id="faqPage">
+  <div class="page-kicker">Вопросы и ответы</div><h1 class="page-heading">Q&amp;A</h1><p class="page-description">Коротко о том, как устроен сайт, на чём основаны ответы ИИ и чего от него не стоит ожидать.</p>
+  <div class="faq-list" id="faqList"></div>
+</section>
+</main><!-- ═══════════ ФУТЕР (общий для всех страниц): контакты, источники, сервисы, оговорки ═══════════ -->
+<footer class="footer" id="siteFooter">
+  <div class="shell">
+    <div class="footer-grid">
+      <section class="footer-col" aria-labelledby="footAbout">
+        <h2 class="footer-brand" id="footAbout">EthicsComitee</h2>
+        <p>Информационно-аналитический сервис по этике государственной службы Республики Казахстан.</p>
+        <p class="footer-ai"><span class="footer-badge">ИИ</span>Ответы на вкладке «Разбор» формируются искусственным интеллектом и могут содержать неточности.</p>
+      </section>
+      <section class="footer-col" aria-labelledby="footContacts">
+        <h2 class="footer-title" id="footContacts">Контакты</h2>
+        <ul class="footer-list">
+          <li><span class="footer-label">Эл. почта</span><a href="mailto:tulegenovalidar0001@gmail.com">tulegenovalidar0001@gmail.com</a></li>
+          <li><span class="footer-label">Телефон</span><a href="tel:+70000000">+7 000 0000</a></li>
+        </ul>
+      </section>
+      <section class="footer-col" aria-labelledby="footSources">
+        <h2 class="footer-title" id="footSources">Официальные источники</h2>
+        <ul class="footer-list">
+          <li><a href="https://adilet.zan.kz/rus/" data-adilet target="_blank" rel="noopener noreferrer">ИПС «Әділет»</a><span class="footer-note">Официальные тексты нормативных правовых актов Республики Казахстан</span></li>
+          <li><a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer">Google AI Studio (API)</a><span class="footer-note">Сервис Google для работы с Gemini API: формирует ответы ИИ на вкладке «Разбор»</span></li>
+        </ul>
+      </section>
+      <section class="footer-col" aria-labelledby="footTools">
+        <h2 class="footer-title" id="footTools">Использованные сервисы ИИ</h2>
+        <ul class="footer-list">
+          <li><a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude</a><span class="footer-note">Anthropic</span></li>
+          <li><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a><span class="footer-note">OpenAI</span></li>
+        </ul>
+        <p class="footer-note">Применялись при разработке сайта и подготовке материалов.</p>
+      </section>
+    </div>
+    <div class="footer-legal">
+      <p>Нормативная база подготовлена в 2026 году и не обновляется автоматически. Перед применением норм сверяйтесь с действующей редакцией акта в ИПС «Әділет».</p>
+      <p>Сервис носит информационно-аналитический характер, не является официальным разъяснением государственного органа или юридическим заключением.</p>
+      <p>Тексты вопросов передаются сервису Google Gemini API для формирования ответа: не указывайте персональные данные, служебную тайну и сведения ограниченного доступа.</p>
+      <p class="footer-copy">© 2026 EthicsComitee</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JS: порядок важен — translations.js (словарь) → app.js (ядро) → остальные модули -->
+<script src="js/translations.js"></script>
+<script src="js/app.js"></script>
+<script src="js/terms.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/faq.js"></script>
+<script src="js/footer.js"></script>
+<script src="js/effects.js"></script>
+</body>
+</html>
